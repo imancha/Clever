@@ -1,16 +1,26 @@
 <?php
 
-class Warehouse
-{
-	private $connect;
-	private $table = 'Warehouse';
+include_once('model.php');
 
+class Warehouse extends Model
+{
 	private $id;
 	private $name;
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Warehouse';
 		$this->connect = $connect;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function show($id)
@@ -23,16 +33,6 @@ class Warehouse
 		$res->execute() or die(print_r($res->errorInfo()[2]));
 
 		return $res;
-	}
-
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
 	}
 
 }

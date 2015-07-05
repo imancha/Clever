@@ -26,18 +26,23 @@ class BookController
 				$_stock = $stock->show($row['ID']);
 
 				if($_stock->rowCount() == 1)
+				{
 					$_row = $_stock->fetch(PDO::FETCH_ASSOC);
+				}
 
 				$_warehouse = $stock->showWarehouse($_row['ID Warehouse']);
 
 				if($_warehouse->rowCount() == 1)
+				{
 					$__row = $_warehouse->fetch(PDO::FETCH_ASSOC);
+				}
 
 				$_book_author = $book_author->show($row['ID']);
 
 				if($_book_author->rowCount() > 0)
 				{
 					$_author = [];
+
 					while($___row = $_book_author->fetch(PDO::FETCH_ASSOC))
 					{
 						$author = $book_author->showAuthor($___row['ID Author']);

@@ -52,9 +52,13 @@ class CartController
 		}
 
 		if($add)
+		{
 			$_SESSION['imancha']['cart'][$idx-1] = array('id'=>$_GET['item'],'qty'=>$qty+1);
+		}
 		else
+		{
 			$_SESSION['imancha']['cart'][] = array('id'=>$_GET['item'],'qty'=>1);
+		}
 	}
 
 	public function update()
@@ -171,6 +175,7 @@ class CartController
 		]);
 		$visitor->setIdWarehouse($_SESSION['imancha']['region']);
 		$id = NULL;
+
 		if($visitor->insert())
 		{
 			$id = $connect->lastInsertId();

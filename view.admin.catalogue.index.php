@@ -11,7 +11,7 @@ print '<div>
         </button>
        </div>';
 
-if(count($data) > 0)
+if(count(json_decode($data)) > 0)
 {
 	print '	<table id="dyntable" class="table table-bordered responsive">
 						<colgroup>

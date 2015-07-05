@@ -1,12 +1,10 @@
 <?php
 
+include_once('model.php');
 include_once('model.book.php');
 
-class BookReview
+class BookReview extends Model
 {
-	private $connect;
-	private $table = 'Book Review';
-
 	private $book;
 	private $reviewer;
 	private $email;
@@ -16,8 +14,10 @@ class BookReview
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Book Review';
 		$this->connect = $connect;
 		$this->book = new Book($connect);
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
@@ -54,7 +54,9 @@ class BookReview
 		$res->bindParam(":date", $this->date, PDO::PARAM_STR);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}
@@ -68,7 +70,9 @@ class BookReview
 		$res->bindParam(":reviewer", $reviewer, PDO::PARAM_STR);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}
@@ -94,4 +98,5 @@ class BookReview
 	{
 		return $this->book->show($id_book);
 	}
+
 }

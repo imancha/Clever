@@ -1,18 +1,17 @@
 <?php
 
+include_once('model.php');
 include_once('model.book.php');
 include_once('model.category.detail.php');
 
-class BookCategory
+class BookCategory extends Model
 {
-	private $connect;
-	private $table = 'Book Category';
-
 	private $book;
 	private $category_detail;
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Book Category';
 		$this->connect = $connect;
 		$this->book = new Book($connect);
 		$this->category_detail = new CategoryDetail($connect);
@@ -30,7 +29,9 @@ class BookCategory
 		$res->bindParam(":id_category_detail", $id_category_detail, PDO::PARAM_INT);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}

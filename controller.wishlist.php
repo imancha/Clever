@@ -50,9 +50,13 @@ class WishlistController
 		}
 
 		if($add)
+		{
 			$_SESSION['imancha']['wishlist'][$idx-1] = array('id'=>$_GET['item'],'qty'=>$qty+1);
+		}
 		else
+		{
 			$_SESSION['imancha']['wishlist'][] = array('id'=>$_GET['item'],'qty'=>1);
+		}
 	}
 
 	public function update()
@@ -74,6 +78,7 @@ class WishlistController
 				}
 			}
 		}
+
 		$_SESSION['imancha']['wishlist'][$idx-1] = array('id'=>$_GET['item'],'qty'=>$qty-1);
 	}
 
@@ -86,6 +91,7 @@ class WishlistController
 				$cart_['cart_'][] = array('id'=>$cart['id'],'qty'=>$cart['qty']);
 			}
 		}
+
 		$_SESSION['imancha']['wishlist'] = $cart_['cart_'];
 	}
 }

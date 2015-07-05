@@ -1,12 +1,10 @@
 <?php
 
+include_once('model.php');
 include_once('model.warehouse.php');
 
-class ShippingMethod
+class ShippingMethod extends Model
 {
-	private $connect;
-	private $table = 'Shipping Method';
-
 	private $id;
 	private $warehouse;
 	private $name;
@@ -16,8 +14,19 @@ class ShippingMethod
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Shipping Method';
 		$this->connect = $connect;
 		$this->warehouse = new Warehouse($connect);
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function select()
@@ -51,13 +60,4 @@ class ShippingMethod
 		return $this->warehouse->setId($id_warehouse);
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
 }

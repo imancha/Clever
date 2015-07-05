@@ -1,20 +1,31 @@
 <?php
 
-class Category
-{
-	private $connect;
-	private $table = 'Category';
+include_once('model.php');
 
+class Category extends Model
+{
 	private $id;
 	private $name;
 
 	public function __construct($connect, Array $prop = [])
 	{
+		$this->table = 'Category';
 		$this->connect = $connect;
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
 		}
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function select()
@@ -36,19 +47,11 @@ class Category
 		$res->bindParam(":name", $this->name, PDO::PARAM_STR);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
-	}
-
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
 	}
 
 }

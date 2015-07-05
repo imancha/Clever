@@ -5,7 +5,7 @@ include_once('controller.order.php');
 $action = new OrderController();
 $data = $action->customer();
 
-if(count($data) > 0)
+if(count(json_decode($data)) > 0)
 {
 	print '	<table id="dyntable" class="table table-bordered responsive">
 						<thead>

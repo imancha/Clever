@@ -284,6 +284,7 @@ class OrderController
 		]);
 		$dispatch->setIdOrder($_POST['id']);
 		$_dispatch = $dispatch->update();
+
 		Database::disconnect();
 
 		return $_dispatch;

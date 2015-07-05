@@ -105,10 +105,10 @@
 							</a>
 						</li>
 						<li>
-							<a href="../?!=cart">
+							<a href="./?!=cart">
 								<i class="fa fa-shopping-cart fa-fw"></i>
 								<span class="hidden-xs">
-									<?php echo $GLOBALS['O6']; ?>
+									<?php echo $GLOBALS['O6'].'('.count($_SESSION['imancha']['cart']).')'; ?>
 								</span>
 							</a>
 						</li>
@@ -430,7 +430,9 @@ function breadcrumb()
 		{
 			case 'about': echo '<i class="fa fa-angle-right fa-fw"></i> '.$GLOBALS['O4'].''; break;
 			case 'contact': echo '<i class="fa fa-angle-right fa-fw"></i> '.$GLOBALS['O11'].''; break;
+			case 'cart': echo '<i class="fa fa-angle-right fa-fw"></i> '.$GLOBALS['O18'].''; break;
 			case 'wishlist': echo '<i class="fa fa-angle-right fa-fw"></i> '.$GLOBALS['O5'].''; break;
+			case 'checkout': echo '<i class="fa fa-angle-right fa-fw"></i> '.$GLOBALS['O7'].''; break;
 		}
 	}
 }

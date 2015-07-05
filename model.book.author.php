@@ -1,18 +1,17 @@
 <?php
 
+include_once('model.php');
 include_once('model.book.php');
 include_once('model.author.php');
 
-class BookAuthor
+class BookAuthor extends Model
 {
-	private $connect;
-	private $table = 'Book Author';
-
 	private $book;
 	private $author;
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Book Author';
 		$this->connect = $connect;
 		$this->book = new Book($connect);
 		$this->author = new Author($connect);
@@ -40,7 +39,9 @@ class BookAuthor
 		$res->bindParam(":id_author", $id_author, PDO::PARAM_INT);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}
@@ -71,4 +72,5 @@ class BookAuthor
 	{
 		return $this->book->show($id_book);
 	}
+
 }

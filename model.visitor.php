@@ -1,12 +1,10 @@
 <?php
 
+include_once('model.php');
 include_once('model.warehouse.php');
 
-class Visitor
+class Visitor extends Model
 {
-	private $connect;
-	private $table = 'Visitor';
-
 	private $id;
 	private $warehouse;
 	private $name;
@@ -14,12 +12,24 @@ class Visitor
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Visitor';
 		$this->connect = $connect;
 		$this->warehouse = new Warehouse($connect);
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
 		}
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function insert()
@@ -62,13 +72,4 @@ class Visitor
 		return $this->warehouse->setId($id_warehouse);
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
 }

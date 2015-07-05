@@ -1,20 +1,29 @@
 <?php
 
+include_once('model.php');
 include_once('model.category.php');
 
-class CategoryDetail
+class CategoryDetail extends Model
 {
-	private $connect;
-	private $table = 'Category Detail';
-
 	private $id;
 	private $name;
 	private $category;
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Category Detail';
 		$this->connect = $connect;
 		$this->category = new Category($connect);
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function select()
@@ -53,16 +62,6 @@ class CategoryDetail
 		return $res;
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
-
 	public function setIdCategory($id_category)
 	{
 		return $this->category->setId($id_category);
@@ -72,4 +71,5 @@ class CategoryDetail
 	{
 		return $this->category->select();
 	}
+
 }

@@ -1,23 +1,33 @@
 <?php
 
+include_once('model.php');
 include_once('model.visitor.php');
 
-class Cart
+class Cart extends Model
 {
-	private $connect;
-	private $table = 'Cart';
-
 	private $id;
 	private $visitor;
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Cart';
 		$this->connect = $connect;
 		$this->visitor = new Visitor($connect);
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
 		}
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function insert()
@@ -65,13 +75,4 @@ class Cart
 		return $this->visitor->setId($id_visitor);
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
 }

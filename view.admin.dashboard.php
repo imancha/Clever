@@ -10,7 +10,7 @@ include_once('controller.cart.php');
 $action = new CartController();
 $data = $action->visitor();
 
-if(count($data) > 0)
+if(count(json_decode($data)) > 0)
 {
 	print '	<table id="dyntable" class="table table-bordered responsive">
 						<thead>

@@ -1,22 +1,22 @@
 <?php
 
+include_once('model.php');
 include_once('model.book.php');
 include_once('model.cart.php');
 
-class CartItem
+class CartItem extends Model
 {
-	private $connect;
-	private $table = 'Cart Item';
-
 	private $cart;
 	private $book;
 	private $quantity;
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Cart Item';
 		$this->connect = $connect;
 		$this->cart = new Cart($connect);
 		$this->book = new Book($connect);
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;

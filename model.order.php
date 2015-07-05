@@ -1,13 +1,11 @@
 <?php
 
+include_once('model.php');
 include_once('model.customer.php');
 include_once('model.cart.php');
 
-class Order
+class Order extends Model
 {
-	private $connect;
-	private $table = 'Order';
-
 	private $id_order;
 	private $customer;
 	private $date;
@@ -17,13 +15,25 @@ class Order
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Order';
 		$this->connect = $connect;
 		$this->customer = new Customer($connect);
 		$this->cart = new Cart($connect);
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
 		}
+	}
+
+	public function setId($id_order)
+	{
+		$this->id_order = $id_order;
+	}
+
+	public function getId()
+	{
+		return $this->id_order;
 	}
 
 	public function insert()
@@ -69,16 +79,6 @@ class Order
 		return $this->customer->show($id_customer);
 	}
 
-	public function setId($id_order)
-	{
-		$this->id_order = $id_order;
-	}
-
-	public function getId()
-	{
-		return $this->id_order;
-	}
-
 	public function setIdCart($id_cart)
 	{
 		return $this->cart->setId($id_cart);
@@ -88,4 +88,5 @@ class Order
 	{
 		return $this->customer->setId($id_customer);
 	}
+
 }

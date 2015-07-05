@@ -1,13 +1,11 @@
 <?php
 
+include_once('model.php');
 include_once('model.book.php');
 include_once('model.warehouse.php');
 
-class Stock
+class Stock extends Model
 {
-	private $connect;
-	private $table = 'Stock';
-
 	private $warehouse;
 	private $book;
 	private $stock;
@@ -15,6 +13,7 @@ class Stock
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Stock';
 		$this->connect = $connect;
 		$this->book = new Book($connect);
 		$this->warehouse = new Warehouse($connect);
@@ -34,7 +33,9 @@ class Stock
 		$res->bindParam(":price", $this->price, PDO::PARAM_STR);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}

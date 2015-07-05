@@ -1,10 +1,9 @@
 <?php
 
-class Book
-{
-	private $connect;
-	private $table = 'Book';
+include_once('model.php');
 
+class Book extends Model
+{
 	private $id;
 	private $title;
 	private $subtitle;
@@ -17,7 +16,9 @@ class Book
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Book';
 		$this->connect = $connect;
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
@@ -32,18 +33,6 @@ class Book
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	public function show($id)
-	{
-		$sql = "SELECT * FROM `".$this->table."` WHERE `ID`=:id";
-		$res = $this->connect->prepare($sql);
-
-		$res->bindParam(":id", $id, PDO::PARAM_INT);
-
-		$res->execute() or die(print_r($res->errorInfo()[2]));
-
-		return $res;
 	}
 
 	public function select()
@@ -72,9 +61,23 @@ class Book
 		$res->bindParam(":language", $this->language, PDO::PARAM_STR);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
+	}
+
+	public function show($id)
+	{
+		$sql = "SELECT * FROM `".$this->table."` WHERE `ID`=:id";
+		$res = $this->connect->prepare($sql);
+
+		$res->bindParam(":id", $id, PDO::PARAM_INT);
+
+		$res->execute() or die(print_r($res->errorInfo()[2]));
+
+		return $res;
 	}
 
 	public function delete($id)
@@ -85,8 +88,11 @@ class Book
 		$res->bindParam(":id", $id, PDO::PARAM_INT);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}
+
 }

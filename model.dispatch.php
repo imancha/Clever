@@ -1,14 +1,12 @@
 <?php
 
+include_once('model.php');
 include_once('model.order.php');
 include_once('model.payment.method.php');
 include_once('model.shipping.method.php');
 
-class Dispatch
+class Dispatch extends Model
 {
-	private $connect;
-	private $table = 'Dispatch';
-
 	private $id;
 	private $order;
 	private $warehouse;
@@ -18,11 +16,13 @@ class Dispatch
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Dispatch';
 		$this->connect = $connect;
 		$this->order = new Order($connect);
 		$this->warehouse = new Warehouse($connect);
 		$this->payment_method = new PaymentMethod($connect);
 		$this->shipping_method = new ShippingMethod($connect);
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
@@ -79,7 +79,9 @@ class Dispatch
 		$res->bindParam(":id_order", $id_order, PDO::PARAM_INT);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}

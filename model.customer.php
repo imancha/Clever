@@ -1,10 +1,9 @@
 <?php
 
-class Customer
-{
-	private $connect;
-	private $table = 'Customer';
+include_once('model.php');
 
+class Customer extends Model
+{
 	private $id;
 	private $first_name;
 	private $last_name;
@@ -19,11 +18,23 @@ class Customer
 
 	public function __construct($connect = null, Array $prop = [])
 	{
+		$this->table = 'Customer';
 		$this->connect = $connect;
+
 		foreach($prop as $key=>$val)
 		{
 			$this->$key = $val;
 		}
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
 	}
 
 	public function insert()
@@ -73,13 +84,4 @@ class Customer
 		return $res;
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
 }

@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 $action = new BookController();
 $data = $action->index($_GET['product']);
 
-if(count($data) > 0)
+if(count(json_decode($data)) > 0)
 {
 	$_action = new ReviewController();
 
@@ -105,7 +105,7 @@ if(count($data) > 0)
 													<div class="product-btns-wr col-md-6 col-sm-8 col-xs-12">
 														<div class="product-btns">
 															<div class="product-big-btns">
-																<button class="btn btn-compare"> <i class="fa fa-heart fa-fw"></i> '.$GLOBALS['O59'].' </button>
+																<button class="btn btn-compare" onclick="window.location=\'./?wishlist=add&item='.$val->id.'\'"> <i class="fa fa-heart fa-fw"></i> '.$GLOBALS['O59'].' </button>
 																<button class="btn btn-addtocart" onclick="window.location=\'./?cart=add&item='.$val->id.'\'"> <i class="fa fa-shopping-cart fa-fw"></i> '.$GLOBALS['O15'].' </button>
 															</div>
 														</div>

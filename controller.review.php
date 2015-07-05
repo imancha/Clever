@@ -17,8 +17,11 @@ class ReviewController
 			while($row = $_book_review->fetch(PDO::FETCH_ASSOC))
 			{
 				$book = $book_review->showBook($row['ID Book']);
+
 				if($book->rowCount() == 1)
+				{
 					$_row = $book->fetch(PDO::FETCH_ASSOC);
+				}
 
 				$data[] = [
 					'id' => $row['ID Book'],
@@ -84,6 +87,7 @@ class ReviewController
 		$connect = Database::connect();
 		$book_review = new BookReview($connect);
 		$_book_review = $book_review->delete($id_book,$reviewer);
+
 		Database::disconnect();
 
 		return $_book_review;

@@ -1,16 +1,31 @@
 <?php
 
-class Author
-{
-	private $connect;
-	private $table = 'Author';
+include_once('model.php');
 
+class Author extends Model
+{
 	private $id;
 	private $name;
 
 	public function __construct($connect = null)
 	{
+		$this->table = 'Author';
 		$this->connect = $connect;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	public function setName($name)
+	{
+		$this->name = $name;
 	}
 
 	public function insert()
@@ -22,7 +37,9 @@ class Author
 		$res->bindParam(":name", $this->name, PDO::PARAM_STR);
 
 		if($res->execute())
+		{
 			return true;
+		}
 
 		return false;
 	}
@@ -51,18 +68,4 @@ class Author
 		return $res;
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function setName($name)
-	{
-		$this->name = $name;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
 }
